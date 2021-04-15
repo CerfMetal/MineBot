@@ -1,0 +1,58 @@
+# config.yaml
+# Minecraft Discord Bot 
+# Made by Tom Croux
+# Date : Wed 14 Apr 2021
+# License : GNU GNUeneral Public License v3.0 (see LICENSE)
+
+# The examples are not real and will not work
+
+# ------------------------------------------------------ #
+# -------------------- Server Settings ----------------- #
+# ------------------------------------------------------ #
+
+# This bot uses Screen to create virtual terminals
+# If you set up multiple minecraft discord bot on the same server, please chose different ScreenPrefix for each server
+# Specify a prefix for your minecraft server and tunnel (spaces are not supported)
+ScreenPrefix : # Example : Survival
+
+# Command to start your minecraft server (leave blank to disable)
+StartMinecraftServer : # Example : java -jar  -Xms512M -Xmx10000M spigot-1.16.5.jar
+
+# Command to start your ip tunnnel (leave blank to disable)
+StartTunnel : # Example : ./Survival_Playit
+
+# Local IP address (used to get information from the server)
+# Default port is 25565
+LocalIP : # Example : 10.120.0.2:25566
+
+# Enable the command "add player ign" on discord
+Whitelist : True # False to disable
+
+# ------------------------------------------------------ #
+# ------------------- Discord Settings ----------------- #
+# ------------------------------------------------------ #
+
+# Discord bot secret key
+DiscordToken : # Example : ODEyODAzNzY3OTkyORR0MzA4.YDREfw.RRV3TSquRrEpofVnHs-RrNwHY0w
+
+# Prefix of the discord bot
+Prefix : mn
+
+# Send the ip of the server (leave blank to disable)
+ServerIP : # Example : Java - red.playit.gg \n Bedrock - devo.playit.gg port 48120 
+
+# ID of the channel for events
+EventChannelId : # Example : 11781234277155321
+
+# ------------------------------------------------------ #
+# ------------------ Additional Settings --------------- #
+# ------------------------------------------------------ #
+
+# Notifications using spontit (https://spontit.com)
+# Leave everything blank to disable 
+SpontitToken : # Example : FG2DGPXQI0RX0SICNCF2PTDSSRUNCIDB6USUS2CKT65097YQOSY1G9H8PWUZBA
+SpontitUserName : # Example : Minecraft
+ChannelName : # Example : Survival
+
+
+
