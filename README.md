@@ -2,7 +2,7 @@
 ![Build](https://img.shields.io/badge/Build-passing-brightgreen)
 [![Discord : MineBot](https://img.shields.io/badge/Discord-MineBot-blue)](https://discord.gg/pAWFNgT7)
 ![Version](https://img.shields.io/badge/Version-1.0-red)
-[![License: GNU General Public License v3.0](https://img.shields.io/badge/License-GNU%20General%20Public%20License%20v3.0-yellow)](https://opensource.org/licenses/GPL-3.0)
+[![License: GNU GPL v3.0](https://img.shields.io/badge/License-GNU%20General%20Public%20License%20v3.0-yellow)](https://opensource.org/licenses/GPL-3.0)
 
 # MineBot
 
