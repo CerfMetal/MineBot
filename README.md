@@ -33,9 +33,9 @@ Then add the discord bot to your discord server.
 
 You'll need to edit the config.yaml file to customise your discord bot.
 #####
-Copy your bot's token and paste it after ```DiscordToken :```.
+Copy your bot's token and paste it after ```DiscordToken :```
 #####
-You can then run the ```MinecraftBot.py``` python script and enjoy the discord bot!
+You can then run the ```MinecraftBot.py``` python script and enjoy your MineBot!
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
