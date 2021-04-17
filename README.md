@@ -44,3 +44,6 @@ Please make sure to update tests as appropriate.
 
 ## License
 [GNU General Public License v3.0](https://opensource.org/licenses/GPL-3.0)
+
+## Download
+[Download it here](https://github.com/CerfMetal/Minecraft-Discord-Bot/archive/refs/heads/main.zip)
