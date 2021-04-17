@@ -19,6 +19,8 @@ pip install mcstatus
 pip install pyyaml 
 ```
 
+This bot uses Screen to create virtual terminals. Install it by running ```sudo apt install screen``` in your linux shell.
+
 (A python setup script will be available soon)
 
 ## Discord bot
