@@ -21,7 +21,7 @@ pip install mcstatus
 pip install pyyaml 
 ```
 
-(A python setup programm will soon be available)
+(A python setup script will soon be available)
 
 ## Usage
 
