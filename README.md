@@ -27,7 +27,7 @@ This bot uses Screen to create virtual terminals. Install it by running ```sudo 
 
 To create your discord bot, you can follow this link to the [discord.py documentation](https://discordpy.readthedocs.io/en/latest/discord.html).
 #####
-and add the discord bot to your discord server.
+Then add the discord bot to your discord server.
 
 ## Usage
 
