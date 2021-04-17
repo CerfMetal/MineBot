@@ -1,3 +1,4 @@
+#####
 ![Build](https://img.shields.io/badge/Build-passing-brightgreen)
 [![Discord : MineBot](https://img.shields.io/badge/Discord-MineBot-blue)](https://discord.gg/pAWFNgT7)
 ![Version](https://img.shields.io/badge/Version-1.0-red)
