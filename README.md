@@ -10,7 +10,7 @@ MineBot is a Python Discord bot made to control and give informations about your
 
 ## Installation
 
-Download the python program [here](https://github.com/CerfMetal/Minecraft-Discord-Bot/archive/refs/heads/main.zip) and add it to your minecraft server repertory.
+Download the python script and the config.yaml file [here](https://github.com/CerfMetal/Minecraft-Discord-Bot/archive/refs/heads/main.zip) and add them to your minecraft server repertory.
 
 Intsall the necessary python modules listed below using pip :
 
@@ -26,11 +26,16 @@ pip install pyyaml
 ## Discord bot
 
 To create your discord bot, you can follow this link to the [discord.py documentation](https://discordpy.readthedocs.io/en/latest/discord.html).
+#####
+and add the discord bot to your discord server.
 
 ## Usage
 
 You'll need to edit the config.yaml file to customise your discord bot.
-Copy your bot's token and paste after ```DiscordToken :```.
+#####
+Copy your bot's token and paste it after ```DiscordToken :```.
+#####
+You can then run the ```MinecraftBot.py``` python script and enjoy the discord bot!
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
