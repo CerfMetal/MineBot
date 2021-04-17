@@ -12,7 +12,7 @@ MineBot is a Python Discord bot made to control and give informations about your
 
 Download the python program [here](https://github.com/CerfMetal/Minecraft-Discord-Bot/archive/refs/heads/main.zip) and add it to your minecraft server repertory.
 
-Intall the necessary python modules listed below using pip :
+Intsall the necessary python modules listed below using pip :
 
 ```bash
 pip install discord.py
@@ -20,6 +20,8 @@ pip install asyncio
 pip install mcstatus
 pip install pyyaml 
 ```
+
+(A python setup programm will soon be available)
 
 ## Usage
 
