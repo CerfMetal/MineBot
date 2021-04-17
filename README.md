@@ -25,11 +25,12 @@ pip install pyyaml
 
 ## Discord bot
 
-To create your discord bot, you can follow this link to the [discord.py documentation](https://discordpy.readthedocs.io/en/latest/discord.html)
+To create your discord bot, you can follow this link to the [discord.py documentation](https://discordpy.readthedocs.io/en/latest/discord.html).
 
 ## Usage
 
-You can edit the config.yaml file to customise the discord bot.
+You'll need to edit the config.yaml file to customise your discord bot.
+Copy your bot's token and paste after ```bashDiscordToken :```.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
