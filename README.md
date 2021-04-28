@@ -15,7 +15,7 @@ Download the ```setup.sh``` shell script and run it using these commands :
 chmod a+x setup.sh
 ./setup.sh
 ```
-(You may need to use sudo for these 2 commands)
+(You may need to use sudo for both commands)
 #####
 This script will download all the necessary packages and python modules.
 #####
