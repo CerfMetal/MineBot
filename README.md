@@ -47,5 +47,13 @@ Please make sure to update tests as appropriate.
 #####
 [Download the discord bot](https://github.com/CerfMetal/Minecraft-Discord-Bot/archive/refs/heads/main.zip)
 
-## More info on Screen
-Screen 
+## More info on GNU Screen
+[Screen](https://www.gnu.org/software/screen/) is a full-screen window manager that multiplexes a physical terminal between several processes, typically interactive shells.
+
+MineBot uses this software to create "virtual terminals" that will each run a certain process (minecraft server, ip tunnel...).
+
+To access the minecraft server console, you'll need to perform this command : 
+```shell
+screen -r <ScreenPrefix>
+```
+Where you replace ```ScreenPrefix``` by the ScreenPrefix value in the config.yaml file.
