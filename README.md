@@ -10,20 +10,10 @@ MineBot is a Python Discord bot made to control and give information about your 
 
 ## Installation
 
-Download the python script and the config.yaml file [here](https://github.com/CerfMetal/Minecraft-Discord-Bot/archive/refs/heads/main.zip) and add them to your minecraft server repertory.
-
-Intsall the necessary python modules listed below using pip :
-
-```bash
-pip install discord.py
-pip install asyncio
-pip install mcstatus
-pip install pyyaml 
-```
-
-This bot uses Screen to create virtual terminals. Install it by running ```sudo apt install screen``` in your linux shell.
-
-(A python setup script will be available soon)
+Download the setup.sh shell script and run it.
+#####
+This script will download all the necessary packages and python modules.
+#####
 
 ## Discord bot
 
