@@ -56,4 +56,4 @@ To access the minecraft server console, you'll need to perform this command :
 ```shell
 screen -r <ScreenPrefix>
 ```
-Where you replace ```ScreenPrefix``` by the ScreenPrefix value in the config.yaml file.
+Where you replace ```ScreenPrefix``` by the ScreenPrefix's value in the config.yaml file.
