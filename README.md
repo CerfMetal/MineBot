@@ -1,6 +1,6 @@
 #####
 ![Build](https://img.shields.io/badge/Build-passing-brightgreen)
-[![Discord : MineBot](https://img.shields.io/badge/Discord-MineBot-blue)](https://discord.gg/pAWFNgT7)
+[![Download : setup.sh](https://img.shields.io/badge/Download-setup.sh-blue)](https://github.com/CerfMetal/Minecraft-Discord-Bot/archive/refs/heads/setup.zip)
 ![Version](https://img.shields.io/badge/Version-1.0-red)
 [![License: GPL-3.0-License](https://img.shields.io/badge/License-GPL--3.0--License-yellow)](https://opensource.org/licenses/GPL-3.0)
 
