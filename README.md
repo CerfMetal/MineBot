@@ -30,7 +30,7 @@ Then add the discord bot to your discord server.
 
 You'll need to edit the config.yaml file to customise your discord bot.
 #####
-Copy your bot's token and paste it after ```DiscordToken :```
+Copy your bot's token and paste it after ```DiscordToken :```.
 #####
 You can then run the python script using ```screen -S MineBot -d -m python3 MineBot.py```.
 
