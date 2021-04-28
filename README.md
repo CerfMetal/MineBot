@@ -32,7 +32,7 @@ You'll need to edit the config.yaml file to customise your discord bot.
 #####
 Copy your bot's token and paste it after ```DiscordToken :```
 #####
-You can then run the python script using ```screen -S MineBot -d -m python3 Minebot.py```.
+You can then run the python script using ```screen -S MineBot -d -m python3 MineBot.py```.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
