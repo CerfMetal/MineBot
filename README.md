@@ -43,5 +43,6 @@ Please make sure to update tests as appropriate.
 [GNU General Public License v3.0](https://opensource.org/licenses/GPL-3.0)
 
 ## Download
-[Download the discord bot](https://github.com/CerfMetal/Minecraft-Discord-Bot/archive/refs/heads/main.zip)
 [Download the setup.sh script](https://github.com/CerfMetal/Minecraft-Discord-Bot/archive/refs/heads/main.zip)
+#####
+[Download the discord bot](https://github.com/CerfMetal/Minecraft-Discord-Bot/archive/refs/heads/main.zip)
