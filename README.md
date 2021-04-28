@@ -10,14 +10,14 @@ MineBot is a Python Discord bot made to control and give information on your Min
 
 ## Installation
 
-Download the [```setup.sh```](https://github.com/CerfMetal/Minecraft-Discord-Bot/archive/refs/heads) shell script and run it using these commands :
+Download the [```setup.sh```](https://github.com/CerfMetal/Minecraft-Discord-Bot/tree/setup) shell script and run it using these commands :
 ```shell
 chmod a+x setup.sh
 ./setup.sh
 ```
 (You may need to use sudo for both commands)
 #####
-This script will download all the necessary packages and python modules.
+This script will download all the necessary packages and python modules as long as the discord bot.
 #####
 
 ## Discord bot
