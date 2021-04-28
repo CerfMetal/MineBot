@@ -11,6 +11,10 @@ MineBot is a Python Discord bot made to control and give information about your 
 ## Installation
 
 Download the setup.sh shell script and run it.
+```shell
+chmod a+x setup.sh
+./setup.sh (you may need to use sudo for this command)
+```
 #####
 This script will download all the necessary packages and python modules.
 #####
