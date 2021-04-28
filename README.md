@@ -45,7 +45,6 @@ Please make sure to update tests as appropriate.
 
 ## Download
 [Download the setup.sh script](https://github.com/CerfMetal/Minecraft-Discord-Bot/archive/refs/heads/setup.zip)
-#####
 [Download the discord bot](https://github.com/CerfMetal/Minecraft-Discord-Bot/archive/refs/heads/main.zip)
 
 ## More info on GNU Screen
