@@ -32,7 +32,7 @@ You'll need to edit the config.yaml file to customise your discord bot.
 #####
 Copy your bot's token and paste it after ```DiscordToken :```
 #####
-You can then run the ```MinecraftBot.py``` python script and enjoy your MineBot!
+You can then run the python script using ```screen -S MineBot -d -m python3 Minebot.py```.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
@@ -46,3 +46,6 @@ Please make sure to update tests as appropriate.
 [Download the setup.sh script](https://github.com/CerfMetal/Minecraft-Discord-Bot/archive/refs/heads/setup.zip)
 #####
 [Download the discord bot](https://github.com/CerfMetal/Minecraft-Discord-Bot/archive/refs/heads/main.zip)
+
+## More info on Screen
+Screen 
