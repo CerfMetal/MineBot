@@ -11,7 +11,10 @@ pip3 install discord.py
 pip3 install asyncio
 pip3 install mcstatus
 pip3 install pyyaml 
+pip3 install spontit
+pip3 install requests
 
 wget https://github.com/CerfMetal/Minecraft-Discord-Bot/archive/refs/heads/main.zip # Download the discord bot's files
 unzip main.zip
+rm main.zip
 
