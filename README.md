@@ -6,7 +6,7 @@
 
 # MineBot
 
-MineBot is a Python Discord bot made to control and give information on your Minecraft server on linux or macOS.
+MineBot is a Python Discord bot made to control and give information on your Minecraft server (working on linux and macOS).
 
 ## Installation
 [You can find the full MineBot script here](https://github.com/CerfMetal/Minecraft-Discord-Bot/blob/main/README.md)
