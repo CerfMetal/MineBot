@@ -283,6 +283,7 @@ async def on_message(message) :
                 for i in range(len(msg)-2):
                     embedVar.add_field(name=msg[i+2].split("- ")[0], value=msg[i+2].split("- ")[1], inline=False)
 
+            await EventChannel.send(msg[0])
             eventMessage = await EventChannel.send(embed=embedVar)
             await eventMessage.add_reaction(Success) and await eventMessage.channel.send(msg[0]) and await message.add_reaction(Sent)
         
