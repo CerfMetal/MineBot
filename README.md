@@ -17,7 +17,7 @@ chmod a+x setup.sh
 ```
 (You may need to use sudo for both commands)
 #####
-This script will download all the necessary packages and python modules as long as the discord bot.
+This script will download all the necessary packages and python modules in addtion to the discord bot.
 #####
 
 ## Discord bot
