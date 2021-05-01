@@ -1,4 +1,4 @@
-# Minecraft Discord Bot 
+# MineBot
 # Made by Tom Croux
 # Date : Sat 1 May 2021
 # License : GNU General Public License v3.0 (see LICENSE)
