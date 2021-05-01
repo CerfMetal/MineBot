@@ -77,15 +77,22 @@ async def ServerPresence():
         if ServerStatus() == True :
             onlinePlayers = OnlinePlayers()
             if onlinePlayers == None or onlinePlayers == 0 :
-            	try : await client.change_presence(activity=discord.Game(name="Minecraft"))
-            	except : pass
+            	try : 
+            		await client.change_presence(activity=discord.Game(name="Minecraft"))
+            	except : 
+            		pass
             else :
-            	await client.change_presence(activity=discord.Game(name="Minecraft (" + str(onlinePlayers) + "/50)"))
+            	try :
+            		await client.change_presence(activity=discord.Game(name="Minecraft (" + str(onlinePlayers) + "/50)"))
+            	except :
+            		pass
 
         # If the server is closed
         elif ServerStatus() == False :
-            try : await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="TV | " + Prefix + " help"))
-            except : pass
+            try : 
+            	await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="TV | " + Prefix + " help"))
+            except : 
+            	pass
 
         await asyncio.sleep(20)
 
@@ -221,7 +228,7 @@ async def on_message(message) :
         if ServerStatus() == True:
             onlinePlayers = OnlinePlayers()
             if onlinePlayers == 0 or onlinePlayers == None :
-                await message.channel.send("No onme is curretly online") and await message.add_reaction(Sad)
+                await message.channel.send("No one is curretly online") and await message.add_reaction(Sad)
             else :
                 server = MinecraftServer.lookup(LocalIP)
                 query = server.query()
