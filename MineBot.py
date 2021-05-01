@@ -1,6 +1,6 @@
 # Minecraft Discord Bot 
 # Made by Tom Croux
-# Date : Wed 14 Apr 2021
+# Date : Sat 1 May 2021
 # License : GNU General Public License v3.0 (see LICENSE)
 
 # Initalise imports
