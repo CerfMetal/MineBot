@@ -1,6 +1,6 @@
 # MineBot
 # Made by Tom Croux
-# Date : Sat 1 May 2021
+# Date : Sat 15 May 2021
 # License : GNU General Public License v3.0 (see LICENSE)
 
 # Initalise imports
@@ -28,7 +28,7 @@ with open(r'config.yaml') as file:
 # Server Settings
 ScreenPrefix, StartMinecraftServer, StartTunnel, LocalIP, Whitelist = config[0], config[1], config[2], config[3], config[4]
 # Discord Settings
-DiscordToken, Prefix, ServerIP, EventChannelId = config[5], config[6], config[7], config[8]
+DiscordToken, Prefix, ServerIP, EventChannelId = config[5], config[6].lower(), config[7], config[8]
 # Additional Settings
 SpontitToken, SpontitUserName, ChannelName = config[9], config[10], config[11]
 
@@ -37,6 +37,7 @@ try :
     client = discord.Client()
 except :
     print("ERROR : Discord Token error")
+    exit()
 
 # Spontit setup
 try :
@@ -45,8 +46,41 @@ except :
     print("Error : Failed to initalise the Spontit Ressource (check username and token)")
 
 BotName = ""
-commandsAdmin = ["start - Start the minecraft server", "stop - Stop the minecraft server", "add - Whitelist a player using its ign", "send - Send a command to the minecraft server", "term - Send a command to the server", "ip - Get the ip of the minecraft server", "list - Get online players", "say - Broadcast a message to the minecraft server", "report - Report a bug", "event - Create an event"]
-commands = ["ip - Get the ip of the minecraft server", "add - Whitelist a player using its ign", "list - Get online players", "report - Report a bug"]
+
+# Help on commands
+commandsAdmin = []
+commands = []
+
+if ScreenPrefix == None :
+    print('Set ScreenPrefix to "minecraft"')
+    ScreenPrefix = "minecraft"
+
+if StartMinecraftServer != None :
+    commandsAdmin.append("start - Start the minecraft server")
+    commandsAdmin.append("stop - Stop the minecraft server")
+    commandsAdmin.append("send - Send a command to the minecraft server")
+    commandsAdmin.append("say - Broadcast a message to the minecraft server")
+
+commandsAdmin.append("term - Send a command to the server")
+
+if ServerIP != None :
+    commandsAdmin.append("ip - Get the ip of the minecraft server")
+    commands.append("ip - Get the ip of the minecraft server")
+
+if LocalIP != None :
+    commandsAdmin.append("list - Get online players")
+    commands.append("list - Get online players")
+
+if Whitelist :
+    commandsAdmin.append("add - Whitelist a player using its ign")
+    commands.append("add - Whitelist a player using its ign")
+
+commandsAdmin.append("report - Report a bug")
+commands.append("report - Report a bug")
+
+if ChannelName != None : commandsAdmin.append("event - Create an event")
+
+
 
 Success = "👍"
 Error = "🚫"
@@ -271,7 +305,7 @@ async def on_message(message) :
     # -------------------------------------------------------- #
     # Create an event 
     elif message.content.lower().startswith(Prefix + " event") :
-        msg = message.content.replace(Prefix + " event ", "")
+        msg = message.content.lower().replace(Prefix + " event ", "")
 
         EventChannel = client.get_channel(EventChannelId)
 
