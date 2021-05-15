@@ -15,7 +15,7 @@ Download the [```setup.sh```](https://github.com/CerfMetal/Minecraft-Discord-Bot
 chmod a+x setup.sh
 ./setup.sh
 ```
-(You may need to use sudo for both commands)
+(You might need to use sudo for both commands)
 #####
 This script will download all the necessary packages and python modules in addtion to the discord bot.
 #####
