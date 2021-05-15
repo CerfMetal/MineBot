@@ -305,7 +305,7 @@ async def on_message(message) :
     # -------------------------------------------------------- #
     # Create an event 
     elif message.content.lower().startswith(Prefix + " event") :
-        msg = message.content.lower().replace(Prefix + " event ", "")
+        msg = message.content.replace(Prefix + " event ", "")
 
         EventChannel = client.get_channel(EventChannelId)
 
