@@ -1,6 +1,6 @@
 # MineBot
 # Made by Tom Croux
-# Date : Sat 15 May 2021
+# Date : Fri 21 May 2021
 # License : GNU General Public License v3.0 (see LICENSE)
 
 # Initalise imports
@@ -96,14 +96,14 @@ Nice = "🤏"
 # -------------------------------------------------------------------------------------------------- #
 # ------------------------------------------ Discord ----------------------------------------------- #
 # -------------------------------------------------------------------------------------------------- #
-# Runs when the program is connected to the discord server
+# Run when the program is connected to the discord server
 @client.event
 async def on_ready():
     print("We have logged in as {0.user}".format(client))
     Loop()
     BotInfo()
 
-# Updates the current activity of the bot - Runs every 20 seconds 
+# Update the current activity of the bot - Run every 20 seconds 
 @client.event
 async def ServerPresence():
     while True :
@@ -183,8 +183,13 @@ async def on_message(message) :
         # If the server is running
         if ServerStatus() == True:
             await message.channel.send("Command sent!") and await message.add_reaction(Sent)
-            cmd = message.content.replace(Prefix + " send ", "")
-            MinecraftServerCommand(cmd, message.author.name)
+
+            cmd = message.content.split(" ")
+            del cmd[0]
+            del cmd[0]
+
+            #cmd = message.content.replace(Prefix + " send ", "")
+            MinecraftServerCommand(' '.join(cmd), message.author.name)
 
         # If the server isn't running -> pass
         else:
@@ -196,9 +201,11 @@ async def on_message(message) :
     # -------------------------------------------------------- #
     # Monitor the server
     elif message.content.lower().startswith(Prefix + " term") and message.author.guild_permissions.administrator :
+        termCmd = message.content.split(" ")
+        del termCmd[0]
+        del termCmd[0]
+        MinecraftTerminalCommand(' '.join(termCmd), message.author.name)
         await message.channel.send("Command sent!") and await message.add_reaction(Sent)
-        term_Cmd = message.content.lower().replace(Prefix + " terminal ", "")
-        MinecraftTerminalCommand(term_Cmd, message.author.name)
 
     # -------------------------------------------------------- #
     # ------------------------ mn ip ------------------------- #
@@ -244,8 +251,11 @@ async def on_message(message) :
     elif message.content.lower().startswith(Prefix + " add") and Whitelist :
         # If the server is running
         if ServerStatus() == True:
-            name = message.content.replace(Prefix + " add ", "")
-            MinecraftServerCommand("whitelist add " + name, None)
+            name = message.content.split(" ")
+            del name[0]
+            del name[0]
+
+            MinecraftServerCommand("whitelist add " + " ".join(name), None)
             await message.channel.send(name + " is now whitelisted!") and await message.add_reaction(Sent)
 
         # If the server isn't running -> pass
@@ -264,30 +274,37 @@ async def on_message(message) :
             if onlinePlayers == 0 or onlinePlayers == None :
                 await message.channel.send("No one is curretly online") and await message.add_reaction(Sad)
             else :
-                server = MinecraftServer.lookup(LocalIP)
-                query = server.query()
-                await message.channel.send("There are " + str(onlinePlayers) + "/50 players online : \n" + "{0}".format(", ".join(query.players.names))) and await message.add_reaction(Gaming)
-            	
+                try :
+                    server = MinecraftServer.lookup(LocalIP)
+                    query = server.query()
+                    await message.channel.send("There are " + str(onlinePlayers) + "/50 players online : \n" + "{0}".format(", ".join(query.players.names))) and await message.add_reaction(Gaming)
+                
+                except :
+                     await message.channel.send("ERROR (list is yet not supported for Minecraft 1.17)") and await message.add_reaction(ERROR)
 
         # If the server isn't running
         else:
             # Warn the sender
-            await message.channel.send("The server is not running... Start the server to send a command!") and await message.add_reaction(Error)
+            await message.channel.send("The server is not running!") and await message.add_reaction(Error)
 
     # -------------------------------------------------------- #
     # ------------------------ mn say ------------------------ #
     # -------------------------------------------------------- #
     # Broadcast a message
-    elif message.content.lower().startswith(Prefix + " say") :
+    elif message.content.lower().startswith(Prefix + " say") and message.author.guild_permissions.administrator :
         # If the server is open
         if ServerStatus() == True :
             await message.channel.send("Message sent!") and await message.add_reaction(Sent)
-            msg = message.content.lower().replace(Prefix + " say ", "")
-            MinecraftServerCommand("say " + msg, None)
+            say = message.content.split(" ")
+            del say[0]
+            del say[0]
+
+
+            MinecraftServerCommand("say " + " ".join(say), None)
 
         else:
             # Warn the operator if the server is closed
-            await message.channel.send("The server is not running... Start the server to send a command!") and await message.add_reaction(Error)
+            await message.channel.send("The server is not running... Start the server to say something!") and await message.add_reaction(Error)
 
     # -------------------------------------------------------- #
     # ----------------------- mn report ---------------------- #
@@ -295,7 +312,11 @@ async def on_message(message) :
     # Report a bug
     elif message.content.lower().startswith(Prefix + " report") :
         # Console and notification info
-        msg = "BUG reported : " + message.content.lower().replace(Prefix + " report ", "")
+        bug = message.content.split(" ")
+        del bug[0]
+        del bug[0]
+
+        msg = "BUG reported : " + " ".join(bug)
         Notification(msg)
 
         await message.channel.send("Problem reported!") and await message.add_reaction(Nice)
@@ -304,8 +325,10 @@ async def on_message(message) :
     # ------------ ---------- mn event ... -------------------- #
     # -------------------------------------------------------- #
     # Create an event 
-    elif message.content.lower().startswith(Prefix + " event") :
-        msg = message.content.replace(Prefix + " event ", "")
+    elif message.content.lower().startswith(Prefix + " event") and message.author.guild_permissions.administrator :
+        msg = message.content.split(" ")
+        del msg[0]
+        del msg[0]
 
         EventChannel = client.get_channel(EventChannelId)
 
@@ -319,12 +342,10 @@ async def on_message(message) :
 
             await EventChannel.send(msg[0])
             eventMessage = await EventChannel.send(embed=embedVar)
-            await eventMessage.add_reaction(Success) and await eventMessage.channel.send(msg[0]) and await message.add_reaction(Sent)
+            await eventMessage.add_reaction(Success) and await message.add_reaction(Sent)
         
         except :
-            await message.channel.send("**Error** : Your command should look something like this :\nmn event <Heading> \\n <Title> \\n <Name2> - <Value2> \\n <Name2> - <Value2>...") and await message.add_reaction(Error)
-
-        #await message.channel.purge(limit=1) and await message.channel.send(msg[0]) and await message.channel.send(embed=embedVar)
+            await message.channel.send("**Error** : Your command should look something like this :\nmn event <Heading> \\n <Title> \\n <Name1> - <Value1> \\n <Name2> - <Value2>...") and await message.add_reaction(Error)
 
 # -------------------------------------------------------------------------------------------------- #
 # -------------------------------------------------------------------------------------------------- #
@@ -403,7 +424,7 @@ def Start(author) :
 # Stop the server
 def Stop(author) :
     # Stop command
-    os.system("screen -S " + ScreenPrefix + "_Minecraft -X stuff 'stop ^M'")
+    os.system("screen -S " + ScreenPrefix + "_Minecraft -X stuff 'stop^M'")
 
     if StartTunnel != None :
         # Stop tunnel
@@ -431,9 +452,10 @@ def MinecraftServerCommand(cmd, author):
     	Notification(msg)
 
 def MinecraftTerminalCommand(term_Cmd, author):
-    os.system(term_Cmd)
+    output = os.system(term_Cmd).read()
     msg = author + " sent a command to the  server : " + term_Cmd
     Notification(msg)
+    return output
 
 # -------------------------------------------------------------------------------------------------- #
 # -------------------------------------------------------------------------------------------------- #
