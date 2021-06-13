@@ -32,6 +32,8 @@ You'll need to edit the config.yaml file to customise your discord bot.
 #####
 Copy your bot's token and paste it after ```DiscordToken :```.
 #####
+In the ```server.properties``` file, ```set enable-query``` to true .
+#####
 You can then run the python script using ```screen -S MineBot -d -m python3 MineBot.py```.
 
 ## Contributing
