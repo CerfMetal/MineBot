@@ -332,6 +332,7 @@ async def on_message(message) :
 
         EventChannel = client.get_channel(EventChannelId)
 
+        msg = " ".join(msg)
         try :
             if "\\n" in msg :
                 msg = msg.split("\\n")
@@ -345,7 +346,7 @@ async def on_message(message) :
             await eventMessage.add_reaction(Success) and await message.add_reaction(Sent)
         
         except :
-            await message.channel.send("**Error** : Your command should look something like this :\nmn event <Heading> \\n <Title> \\n <Name1> - <Value1> \\n <Name2> - <Value2>...") and await message.add_reaction(Error)
+            await message.channel.send("**Error** : Your command should look something like this :\n" + Prefix + " event <Heading> \\n <Title> \\n <Name1> - <Value1> \\n <Name2> - <Value2>...") and await message.add_reaction(Error)
 
 # -------------------------------------------------------------------------------------------------- #
 # -------------------------------------------------------------------------------------------------- #
@@ -452,10 +453,9 @@ def MinecraftServerCommand(cmd, author):
     	Notification(msg)
 
 def MinecraftTerminalCommand(term_Cmd, author):
-    output = os.system(term_Cmd).read()
+    os.system(term_Cmd)
     msg = author + " sent a command to the  server : " + term_Cmd
     Notification(msg)
-    return output
 
 # -------------------------------------------------------------------------------------------------- #
 # -------------------------------------------------------------------------------------------------- #
