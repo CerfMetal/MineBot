@@ -272,7 +272,7 @@ async def on_message(message) :
         if ServerStatus() == True:
             onlinePlayers = OnlinePlayers()
             if onlinePlayers == 0 or onlinePlayers == None :
-                await message.channel.send("No one is curretly online") and await message.add_reaction(Sad)
+                await message.channel.send("No one is currently online") and await message.add_reaction(Sad)
             else :
                 try :
                     server = MinecraftServer.lookup(LocalIP)
