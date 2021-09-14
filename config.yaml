@@ -49,7 +49,7 @@ ServerIP : # Example : Java - red.playit.gg \n Bedrock - devo.playit.gg port 481
 EventChannelId : # Example : 11781234277155321
 
 # Ppl who can control the server (in addition to admins)
-Administrator : CerfMetal, jsmo 
+Administrator : # Example : CerfMetal
 
 # ------------------------------------------------------ #
 # ------------------ Additional Settings --------------- #
