@@ -26,7 +26,11 @@ StartTunnel : # Example : ./Survival_Playit
 LocalIP : # Example : 10.120.0.2:25566
 
 # Enable the command "add player ign" on discord
-Whitelist : True # False to disable
+Whitelist : False # True to enable
+
+# Connect to the minebot plugin
+# Set which discord channel will be used for the minecraft chat
+MinecraftChat : 814009719627524833 # Leave blank to disable
 
 # ------------------------------------------------------ #
 # ------------------- Discord Settings ----------------- #
@@ -43,6 +47,9 @@ ServerIP : # Example : Java - red.playit.gg \n Bedrock - devo.playit.gg port 481
 
 # ID of the channel for events
 EventChannelId : # Example : 11781234277155321
+
+# Ppl who can control the server (in addition to admins)
+Administrator : CerfMetal, jsmo 
 
 # ------------------------------------------------------ #
 # ------------------ Additional Settings --------------- #
