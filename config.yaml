@@ -30,7 +30,7 @@ Whitelist : False # True to enable
 
 # Connect to the minebot plugin
 # Set which discord channel will be used for the minecraft chat
-MinecraftChat : 814009719627524833 # Leave blank to disable
+MinecraftChat : # Leave blank to disable
 
 # ------------------------------------------------------ #
 # ------------------- Discord Settings ----------------- #
@@ -40,7 +40,7 @@ MinecraftChat : 814009719627524833 # Leave blank to disable
 DiscordToken : # Example : ODEyODAzNzY3OTkyORR0MzA4.YDREfw.RRV3TSquRrEpofVnHs-RrNwHY0w
 
 # Prefix of the discord bot
-Prefix : mn
+Prefix : 
 
 # Send the ip of the server (leave blank to disable)
 ServerIP : # Example : Java - red.playit.gg \n Bedrock - devo.playit.gg port 48120 
