@@ -1,6 +1,6 @@
-# MineBot
+# MineBot V2.0
 # Made by Tom Croux
-# Date : Fri 21 May 2021
+# Date : Sun 11 Jul 2021
 # License : GNU General Public License v3.0 (see LICENSE)
 
 # Initalise imports
@@ -12,25 +12,39 @@ from mcstatus import MinecraftServer
 import time
 from spontit import SpontitResource
 import yaml
+import threading
+import queue
 
 # -------------------------------------------------------------------------------------------------- #
 # ----------------------------------------- Variables ---------------------------------------------- #
 # -------------------------------------------------------------------------------------------------- #
-# Load the configuration from the config.yaml file
+BotName = ""
+
+# Load the configuration from the config.yaml file"
 config = []
-with open(r'config.yaml') as file:
-    # The FullLoader parameter handles the conversion from YAML
-    # scalar values to Python the dictionary format
-    documents = yaml.load(file, Loader=yaml.FullLoader)
-    for item, doc in documents.items():
-        config.append(doc)
+try :
+    with open(r'config.yaml') as file:
+        # The FullLoader parameter handles the conversion from YAML
+        # scalar values to Python the dictionary format
+        documents = yaml.load(file, Loader=yaml.FullLoader)
+        for item, doc in documents.items():
+            config.append(doc)
+except :
+    print("ERROR : Can't find the config.yaml file")
+    print("Downloading the config file...")
+    try :
+        os.system("wget https://github.com/CerfMetal/MineBot/raw/main/config.yaml")
+        print("Config file downloaded successfully")
+    except :
+        print("ERROR : Download failed")
+    exit()
 
 # Server Settings
-ScreenPrefix, StartMinecraftServer, StartTunnel, LocalIP, Whitelist = config[0], config[1], config[2], config[3], config[4]
+ScreenPrefix, StartMinecraftServer, StartTunnel, LocalIP, Whitelist, MinecraftChat = config[0], config[1], config[2], config[3], config[4], config[5]
 # Discord Settings
-DiscordToken, Prefix, ServerIP, EventChannelId = config[5], config[6].lower(), config[7], config[8]
+DiscordToken, Prefix, ServerIP, EventChannelId, Administrator = config[6], config[7].lower(), config[8], config[9], config[10]
 # Additional Settings
-SpontitToken, SpontitUserName, ChannelName = config[9], config[10], config[11]
+SpontitToken, SpontitUserName, ChannelName = config[11], config[12], config[13]
 
 # Discord setup
 try :
@@ -45,8 +59,17 @@ try :
 except :
     print("Error : Failed to initalise the Spontit Ressource (check username and token)")
 
-BotName = ""
+# Emoji
+Success = "👍"
+Error = "🚫"
+Sent = "✅"
+Gaming = "🎮"
+Sad = "😔"
+Nice = "🤏"
 
+# -------------------------------------------------------------------------------------------------- #
+# ------------------------------------------ Help -------------------------------------------------- #
+# -------------------------------------------------------------------------------------------------- #
 # Help on commands
 commandsAdmin = []
 commands = []
@@ -80,14 +103,9 @@ commands.append("report - Report a bug")
 
 if ChannelName != None : commandsAdmin.append("event - Create an event")
 
+if isinstance(MinecraftChat, int) == False :
+    MinecraftChat = 0
 
-
-Success = "👍"
-Error = "🚫"
-Sent = "✅"
-Gaming = "🎮"
-Sad = "😔"
-Nice = "🤏"
 
 # -------------------------------------------------------------------------------------------------- #
 # -------------------------------------------------------------------------------------------------- #
@@ -102,6 +120,9 @@ async def on_ready():
     print("We have logged in as {0.user}".format(client))
     Loop()
     BotInfo()
+    if MinecraftChat != 0 :
+        LoopChat()
+
 
 # Update the current activity of the bot - Run every 20 seconds 
 @client.event
@@ -112,23 +133,40 @@ async def ServerPresence():
             onlinePlayers = OnlinePlayers()
             if onlinePlayers == None or onlinePlayers == 0 :
             	try : 
-            		await client.change_presence(activity=discord.Game(name="Minecraft"))
+            		await client.change_presence(status=discord.Status.online, activity=discord.Game(name="Minecraft"))
             	except : 
             		pass
             else :
             	try :
-            		await client.change_presence(activity=discord.Game(name="Minecraft (" + str(onlinePlayers) + "/50)"))
+                    server = MinecraftServer.lookup(LocalIP)
+                    query = server.query()
+                    await client.change_presence(status=discord.Status.online, activity=discord.Game(name="Minecraft (" + str(onlinePlayers) + ") : " + "\n" + "{0}".format(", ".join(query.players.names))))
             	except :
             		pass
 
         # If the server is closed
         elif ServerStatus() == False :
             try : 
-            	await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="TV | " + Prefix + " help"))
+            	await client.change_presence(status=discord.Status.idle, activity=discord.Activity(type=discord.ActivityType.watching, name="TV | " + Prefix + " help"))
             except : 
             	pass
 
         await asyncio.sleep(20)
+
+@client.event
+async def MinecraftChatLink():
+    cmd_queue = queue.Queue()
+    dj = threading.Thread(target=console, args=(cmd_queue,))
+    dj.start()
+    while 1:
+        cmd = cmd_queue.get()
+        if cmd.startswith("msg") :
+            cmd = cmd.replace("msg ", "", 1)
+            sender = str(cmd.split(" ")[0])
+            msg = f"**{sender}** : {cmd.replace(sender, '', 1)}"
+            await client.get_channel(MinecraftChat).send(msg)
+        if cmd == 'quit':
+            break
 
 # Run on new message
 @client.event
@@ -141,7 +179,7 @@ async def on_message(message) :
     # ----------------------- mn start ----------------------- #
     # -------------------------------------------------------- #
 	# Start the server
-    elif message.content.lower().startswith(Prefix + " start") and message.author.guild_permissions.administrator and StartMinecraftServer != None :
+    elif message.content.lower().startswith(Prefix + " start") and StartMinecraftServer != None and (message.author.guild_permissions.administrator or Administrator.contains(message.author.name)) :
 		# If the server is not running -> start it
     	if ServerStatus() == False:
     		await message.channel.send("Opening server...")
@@ -273,14 +311,22 @@ async def on_message(message) :
             onlinePlayers = OnlinePlayers()
             if onlinePlayers == 0 or onlinePlayers == None :
                 await message.channel.send("No one is currently online") and await message.add_reaction(Sad)
-            else :
+            elif onlinePlayers == 1 :
                 try :
                     server = MinecraftServer.lookup(LocalIP)
                     query = server.query()
-                    await message.channel.send("There are " + str(onlinePlayers) + "/50 players online : \n" + "{0}".format(", ".join(query.players.names))) and await message.add_reaction(Gaming)
+                    await message.channel.send("There is " + str(onlinePlayers) + " player online : \n" + "{0}".format(", ".join(query.players.names))) and await message.add_reaction(Gaming)
                 
                 except :
-                     await message.channel.send("ERROR (list is yet not supported for Minecraft 1.17)") and await message.add_reaction(ERROR)
+                    await message.channel.send("ERROR (list is not supported for Minecraft 1.17)") and await message.add_reaction(ERROR)
+            else : 
+                try :
+                    server = MinecraftServer.lookup(LocalIP)
+                    query = server.query()
+                    await message.channel.send("There are " + str(onlinePlayers) + " players online : \n" + "{0}".format(", ".join(query.players.names))) and await message.add_reaction(Gaming)
+                
+                except :
+                    await message.channel.send("ERROR (list is not supported for Minecraft 1.17)") and await message.add_reaction(ERROR)
 
         # If the server isn't running
         else:
@@ -298,7 +344,6 @@ async def on_message(message) :
             say = message.content.split(" ")
             del say[0]
             del say[0]
-
 
             MinecraftServerCommand("say " + " ".join(say), None)
 
@@ -322,7 +367,7 @@ async def on_message(message) :
         await message.channel.send("Problem reported!") and await message.add_reaction(Nice)
 
     # -------------------------------------------------------- #
-    # ------------ ---------- mn event ... -------------------- #
+    # ---------------------- mn event ... -------------------- #
     # -------------------------------------------------------- #
     # Create an event 
     elif message.content.lower().startswith(Prefix + " event") and message.author.guild_permissions.administrator :
@@ -347,6 +392,14 @@ async def on_message(message) :
         
         except :
             await message.channel.send("**Error** : Your command should look something like this :\n" + Prefix + " event <Heading> \\n <Title> \\n <Name1> - <Value1> \\n <Name2> - <Value2>...") and await message.add_reaction(Error)
+
+    # -------------------------------------------------------- #
+    # ------ MinecraftChatLink (discord to minecraft) -------- #
+    # -------------------------------------------------------- #
+    elif message.channel.id == MinecraftChat :
+        msg = 'tellraw @a "§9<' + message.author.name + '> ' + message.content + '\"'
+        os.system(f"screen -S {ScreenPrefix}_Minecraft -X stuff '{msg} ^M'")
+
 
 # -------------------------------------------------------------------------------------------------- #
 # -------------------------------------------------------------------------------------------------- #
@@ -456,6 +509,32 @@ def MinecraftTerminalCommand(term_Cmd, author):
     os.system(term_Cmd)
     msg = author + " sent a command to the  server : " + term_Cmd
     Notification(msg)
+
+
+# Start loopping (activity)
+def LoopChat(): 
+    loopChat = asyncio.get_event_loop()
+    loopChat.call_later(5, LoopChatStop)
+    taskChat = loopChat.create_task(MinecraftChatLink())
+
+    try :
+        loop.run_until_complete(task)
+    except :
+        pass
+
+# Stop the loop
+def LoopChatStop():
+    try :
+        taskChat.cancel()
+    except :
+        pass
+
+def console(q):
+    while 1:
+        cmd = input('> ')
+        q.put(cmd)
+        if cmd == 'quit':
+            break
 
 # -------------------------------------------------------------------------------------------------- #
 # -------------------------------------------------------------------------------------------------- #
